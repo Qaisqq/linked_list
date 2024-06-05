@@ -24,16 +24,14 @@ class LinkedList:
 
     def append_first(self, value):
         new_node = Node(value)
-        if self.head == None:
+        if self.head is None:
             self.head = new_node
             self.tail = new_node
-            self.count +=1
-            return
         else:
             new_node.next = self.head
             self.head = new_node
-            self.count +=1
-            
+        self.count += 1
+
 
 
     def add_last(self, value):
@@ -197,9 +195,84 @@ class LinkedList:
             current_node = next_node
         self.head = prev_node
 
-    # def merge(self,linked_list1, linked_list2):
-    # def merge_sorted
-    # def split0
-    # def fold
-    # def value_to_index
-    # def velue_to_asteriss
+    def merge(self, linked_list1, linked_list2):
+        merged_list = LinkedList()  
+
+        current_node = linked_list1.head
+        while current_node:
+            merged_list.append_first(current_node.value)
+            current_node = current_node.next
+
+        current_node = linked_list2.head
+        while current_node:
+            merged_list.append_first(current_node.value)
+            current_node = current_node.next
+
+        return merged_list
+    
+    def merge_sorted(self, ll1head, ll2head):
+        merged_list = LinkedList()
+        curr1 = ll1head
+        curr2 = ll2head
+        while curr1 != None and curr2 != None:
+            if curr1.value < curr2.value:
+                merged_list.add_last(curr1.value)
+                curr1 = curr1.next
+            else:
+                merged_list.add_last(curr2.value)
+                curr2 = curr2.next
+
+            while curr1 != None:
+                merged_list.add_last(curr1.value)
+                curr1 = curr1.next
+            while curr2 != None:
+                merged_list.add_last(curr2.value)
+                curr2 = curr2.next
+            
+        return merged_list
+        
+    def split(self):
+        length = self.length()
+        if length == 0 or length == 1:
+            return self.head, None ##if empty returns the og head and none
+        
+        mid = (length + 1) //2 ##adjusted for odd numbers
+        prev_node = None
+        current_node = self.head
+        for _ in range(mid):
+            prev_node = current_node
+            current_node = current_node.next
+        prev_node.next = None
+
+
+        first_ll = LinkedList()
+        second_ll = LinkedList()
+        first_ll.head = self.head
+        second_ll.head = current_node
+        return first_ll, second_ll
+
+    def fold(self):
+        current_node = self.head
+        amount = 0
+        while current_node.next:
+            current_node = current_node.next
+            amount = amount + current_node.value
+        self.head.value = amount
+        self.head.next = None
+        return
+
+    def value_to_index(self, value):
+        current_node = self.head
+        index = 0
+        while current_node.next:
+            if current_node.value == value:
+                return index
+            current_node = current_node.next
+            index +=1
+        return -1 ##if not found
+
+    def print_asterisks(self):
+        current_node = self.head
+        while current_node:
+            print("*" * current_node.value)
+            current_node = current_node.next

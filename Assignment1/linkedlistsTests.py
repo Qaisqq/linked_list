@@ -2,6 +2,7 @@ from linkedlists import LinkedList
 
 
 def test_append_first():
+    print("------TEST-APPEND_FIRST------")
     linked_list = LinkedList()
     linked_list.append_first(1)
     assert linked_list.head.value == 1
@@ -20,6 +21,7 @@ def test_append_first():
 
 
 def test_add_last():
+    print("------TEST-ADD_LAST------")
     linked_list = LinkedList()
     linked_list.add_last(1)
     assert linked_list.head.value == 1
@@ -36,6 +38,7 @@ def test_add_last():
     print("")
 
 def test_add_sorted():
+    print("------TEST-ADD_SORTED------")
     linked_list = LinkedList()
     print("inputting 3, 5, 1, 7, 2 into add_sorted.")
     print("add_sorted Linked list:")
@@ -52,6 +55,7 @@ def test_add_sorted():
     print("")
 
 def test_delete_get_first_node():
+    print("------TEST-DELETE_GET_FIRST------")
     linked_list = LinkedList()
     print("delete_get_first_node Linked list:")
     linked_list.add_sorted(3)
@@ -75,6 +79,7 @@ def test_delete_get_first_node():
     print("")
 
 def test_delete_get_last_node():
+    print("------TEST-DELETE_GET_LAST------")
     linked_list = LinkedList()
     print("delete_get_last_node Linked list:")
     linked_list.add_sorted(3)
@@ -101,6 +106,7 @@ def test_delete_get_last_node():
     print("")
 
 def test_delete_index():
+    print("------TEST-DELETE_INDEX------")
     linked_list = LinkedList()
     print("delete_index Linked list:")
     linked_list.append_first(3)
@@ -121,6 +127,7 @@ def test_delete_index():
     print("")
 
 def test_length():
+    print("------TEST-LENGTH------")
     linked_list = LinkedList()
     print("length Linked list:")
     print("EMPTY")
@@ -144,6 +151,7 @@ def test_length():
     print("")
 
 def test_rmv_dupes():
+    print("------TEST-RMV_DUPES------")
     linked_list = LinkedList()
     linked_list.append_first(1)
     linked_list.append_first(2)
@@ -162,6 +170,7 @@ def test_rmv_dupes():
     print("")    
 
 def test_reverse():
+    print("------TEST-REVERSE------")
     print("creating a Linked list:")
     linked_list = LinkedList()
     linked_list.append_first(1)
@@ -176,7 +185,126 @@ def test_reverse():
     linked_list.reverse(linked_list.head)
     linked_list.display_list()
 
+def test_merge():
+    print("------TEST-MERGE------")
+    print("creating linked list of 1, 2, 3")
+    linked_list1 = LinkedList()
+    linked_list1.append_first(1)
+    linked_list1.append_first(2)
+    linked_list1.append_first(3)
+    linked_list1.display_list()
 
+    print("creating linked list of 3, 4, 5")
+    linked_list2 = LinkedList()
+    linked_list2.append_first(3)
+    linked_list2.append_first(4)
+    linked_list2.append_first(5)
+    linked_list2.display_list()
+
+    print("merging both lists...")
+    merged_link_list = LinkedList()
+    merged_link_list = linked_list1.merge(linked_list1, linked_list2)
+    merged_link_list.display_list()
+
+def test_merge_sorted():
+    print("------TEST-SORTED_MERGE------")
+    print("creating linked list of 1, 2, 3")
+    linked_list1 = LinkedList()
+    linked_list1.append_first(1)
+    linked_list1.add_last(2)
+    linked_list1.add_last(3)
+    linked_list1.display_list()
+
+    print("creating linked list of 1, 3, 4, 5, 6")
+    linked_list2 = LinkedList()
+    linked_list2.append_first(1)
+    linked_list2.add_last(3)
+    linked_list2.add_last(4)
+    linked_list2.add_last(5)
+    linked_list2.add_last(6)
+    linked_list2.display_list()
+
+    print("merging both lists...")
+    merged_link_list = LinkedList()
+    merged_link_list = linked_list1.merge_sorted(linked_list1.head, linked_list2.head)
+    merged_link_list.display_list()
+
+def test_split():
+    print("------TEST-SPLIT_LINKED_LIST------")
+    linked_list = LinkedList()
+    linked_list.append_first(1)
+    linked_list.add_last(2)
+    linked_list.add_last(3)
+    linked_list.add_last(4)
+    linked_list.add_last(5)
+
+    print("Original Linked List:")
+    linked_list.display_list()
+
+    first, second = linked_list.split()
+    print("First Half:")
+    first.display_list()
+    print("Second Half:")
+    second.display_list()
+    print("")
+
+def test_fold():
+    print("------TEST-FOLD------")
+    linked_list = LinkedList()
+    linked_list.append_first(1)
+    linked_list.add_last(2)
+    linked_list.add_last(3)
+    linked_list.add_last(4)
+    linked_list.add_last(5)
+    print("Creating linked list of 1, 2, 3, 4, 5")
+    print("Running fold on linked list...")
+    linked_list.fold()
+    print(f"Returned Value: {linked_list.head.value}")
+
+def test_value_to_index():
+    print("------TEST-FIND-INDEX-BY-VALUE------")
+    linked_list = LinkedList()
+    linked_list.append_first(1)
+    linked_list.add_last(2)
+    linked_list.add_last(3)
+    linked_list.add_last(4)
+    linked_list.add_last(5)
+    print("Creating linked list of 1, 2, 3, 4, 5")
+    print("Finding index of value 3...")
+    index = linked_list.value_to_index(3)
+    print(f"Index of value 3: {index}")
+
+def test_print_asterisks():
+    print("------TEST-PRINT-ASTERISKS------")
+    linked_list = LinkedList()
+    linked_list.append_first(1)
+    linked_list.add_last(3)
+    linked_list.add_last(5)
+    print("Creating linked list of 1, 3, 5")
+    print("Printing asterisks for each value:")
+    linked_list.print_asterisks()
+
+print("time complexity of all methods:")
+print("display_list():          O(n)")
+print("append_first():          O(1)")
+print("add_last(value):         O(n)")
+print("insert_at_index():       O(n)")
+print("add_sorted(value):       O(n)")
+print("delete_get_first_node(): O(n)")
+print("delete_get_last_node():  O(n)")
+print("length():                O(n)")
+print("rmv_dupes():             O(n)")
+print("reverse():               O(n)")
+print("merge():                 O(n)")
+print("split():                 O(1)")
+print("fold():                  O(n)")
+print("value_to_index():        O(n)")
+print("print_asterisks():       O(n)")
+###add_last, insert_at_index and delete_get_last_node can be
+###O(1) if i used a tail
+
+###fold, length can be O(1) if they were calacuted at the addition/deletion
+###of every node
 
 if __name__ == "__main__":
     test_append_first()
@@ -188,4 +316,13 @@ if __name__ == "__main__":
     test_length()
     test_rmv_dupes()
     test_reverse()
+    test_merge()
+    test_merge_sorted()
+    test_split()
+    test_fold()
+    test_value_to_index()
+    test_print_asterisks()
+
+
+
     print("Tests Passed")
